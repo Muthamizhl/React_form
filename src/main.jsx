@@ -1,16 +1,14 @@
-// index.jsx or main.jsx
-import React, { StrictMode } from 'react';
+// main.jsx or index.jsx
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom'; // ✅ import
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 import './index.css';
-import App from './App.jsx';
 
 const root = createRoot(document.getElementById('root'));
 
 root.render(
-  <StrictMode>
-    <BrowserRouter basename="/Json_Form">  {/* Add basename for GitHub Pages */}
-      <App />
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter basename="/React_form">  {/* 👈 this is important */}
+    <App />
+  </BrowserRouter>
 );
