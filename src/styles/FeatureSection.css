@@ -1,0 +1,61 @@
+/* styles/FeatureSection.css */
+.features {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  background-color: silver ;
+  margin: 0 auto;
+}
+
+.features h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: black;
+  text-align: center;
+}
+
+.features p {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  color:black;
+  line-height: 1.6;
+}
+
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  flex: 1 1 280px;
+  max-width: 320px;
+  padding: 2rem;
+  background: white;
+  color: black;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+.card p {
+  color: #6c757d;
+  line-height: 1.6;
+  color: black;
+  margin: 0;
+  text-align: left;
+}

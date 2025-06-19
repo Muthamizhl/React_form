@@ -1,0 +1,718 @@
+/* src/styles/FormBuilderPage.css */
+
+/* --- Variables (Adjusted for Royal colors with Blue buttons) --- */
+:root {
+  --color-background-app: #f0f2f5; /* Light grey background for the page */
+  --color-background-panel: #ffffff; /* White panel background */
+  --color-background-dark-panel: #2c3e50; /* Deep blue/charcoal for sidebars */
+  --color-background-light-panel: #fdfdfd; /* Very light, almost white for canvas background */
+
+  --color-primary: #007bff; /* Base primary blue (used for some borders/accents) */
+  --color-primary-dark: #0056b3; /* Darker primary blue */
+  --color-accent-gold: #FFD700; /* Royal gold accent - kept for sidebar accents if desired */
+  --color-accent-gold-light: #FFEB3B; /* Lighter gold for highlights - kept for sidebar accents */
+  --color-accent-blue: #2c3e50; /* Deep blue for royal text/elements */
+
+  --color-button-blue-base: #007bff; /* Specific blue for buttons */
+  --color-button-blue-dark: #0056b3; /* Darker blue for button hover */
+
+  --color-text-dark: #333333; /* Dark text for readability on light backgrounds */
+  --color-text-medium: #666666; /* Medium grey text */
+  --color-text-light: #eceff1; /* Light text for dark backgrounds */
+  --color-text-white: #ffffff; /* Explicit white for button text */
+  --color-border-light: #e0e0e0; /* Light grey border */
+  --color-border-medium: #cccccc; /* Medium grey border */
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-button-gap: 20px; /* Space above the build button */
+
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* --- Universal Box Sizing for better layout control --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* --- General Page Container --- */
+.form-builder-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, var(--color-background-app), #dee4ea);
+  padding: var(--spacing-xl);
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Back Button --- */
+.back-button {
+  position: absolute;
+  top: var(--spacing-xl);
+  left: var(--spacing-xl);
+  z-index: 10;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.back-button:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  color: var(--color-primary-dark);
+  transform: translateX(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.back-button:active {
+  transform: translateX(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Page Title --- */
+.builder-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--color-accent-blue);
+  margin: var(--spacing-xxl) 0 var(--spacing-xl) 0;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Playfair Display', serif;
+}
+
+/* --- Main Builder Layout Container (Grid) --- */
+.form-builder-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  gap: var(--spacing-xl);
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  /* Ensure enough space from the bottom for the build button and footer */
+  margin: 0 auto var(--spacing-lg) auto; /* Adjusted to have sufficient space at the bottom */
+}
+
+/* --- Sidebars (Left and Right) Royal Styling --- */
+.builder-sidebar {
+  background: linear-gradient(160deg, var(--color-background-dark-panel), #23313d);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.builder-sidebar h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  color: var(--color-accent-gold-light);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Accent for sidebars */
+.builder-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent-gold));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* --- Left Sidebar: Field Types List --- */
+.field-types-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+}
+
+.field-type-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 12px 15px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.field-type-item:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent-gold-light);
+}
+
+.field-type-item .type-icon {
+  font-size: 1.2rem;
+  color: var(--color-accent-gold-light);
+}
+
+/* Draggable item specific styles */
+.draggable-field-item {
+  box-sizing: border-box;
+}
+
+/* --- Center Canvas: Form Preview Area Royal Styling --- */
+.builder-canvas {
+  background: linear-gradient(135deg, var(--color-background-light-panel), #f6f8fa);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 500px;
+}
+
+.canvas-header {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.form-main-title-input {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-accent-blue);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  background-color: #fff;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', serif;
+  box-sizing: border-box;
+}
+
+.form-main-title-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.form-description-input {
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  color: var(--color-text-medium);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background-color: #fcfcfc;
+  resize: vertical;
+  min-height: 80px;
+  transition: all 0.3s ease;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.form-description-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.form-preview-area {
+  flex-grow: 1;
+  padding: var(--spacing-sm);
+  border: 2px dashed rgba(0, 123, 255, 0.2);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 150px;
+}
+
+.form-preview-area.drag-over {
+  border-color: var(--color-primary);
+  background-color: rgba(0, 123, 255, 0.03);
+  box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.1);
+}
+
+.empty-canvas-prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-text-medium);
+  font-style: italic;
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 80%;
+  line-height: 1.5;
+  pointer-events: none;
+}
+
+/* --- SortableFormField Styling (typically defined in its own CSS file, but included for completeness) --- */
+.form-preview-field {
+  background-color: var(--color-background-panel);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid var(--color-primary);
+}
+
+.form-preview-field:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.form-preview-field.editing {
+  border: 2px solid var(--color-accent-gold);
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
+  transform: scale(1.01);
+  z-index: 50;
+}
+
+.form-preview-field.editing::before {
+  content: 'EDITING';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: var(--color-accent-gold);
+  color: var(--color-text-dark);
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-bottom-left-radius: var(--radius-sm);
+  z-index: 51;
+}
+
+.field-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  font-size: 1.05rem;
+}
+
+.field-preview-header span {
+  flex-grow: 1;
+}
+
+.field-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-medium);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: var(--color-primary);
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.delete-btn:hover {
+  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.drag-handle {
+  cursor: grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.field-preview-content {
+  padding-top: var(--spacing-sm);
+  border-top: 1px dashed var(--color-border-light);
+}
+
+.field-preview-content input,
+.field-preview-content textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  background-color: #fefefe;
+  box-sizing: border-box;
+}
+
+.field-preview-content textarea {
+  resize: vertical;
+}
+
+.preview-options label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.95rem;
+  color: var(--color-text-medium);
+}
+
+/* --- Right Sidebar: Field Settings Royal Styling --- */
+.field-settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+}
+
+.field-settings-form h4 {
+  font-size: 1.4rem;
+  color: var(--color-accent-gold-light);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  font-weight: 600;
+}
+
+.field-settings-form label {
+  font-weight: 500;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xs);
+  display: block;
+}
+
+.field-settings-form input[type="text"],
+.field-settings-form input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.field-settings-form input[type="text"]::placeholder,
+.field-settings-form input[type="number"]::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.field-settings-form input[type="text"]:focus,
+.field-settings-form input[type="number"]:focus {
+  border-color: var(--color-accent-gold);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  outline: none;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  color: var(--color-text-light);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-accent-gold);
+}
+
+.select-field-prompt {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.options-group {
+  margin-top: var(--spacing-md);
+}
+
+.options-group label {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-accent-gold-light);
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.option-item input[type="text"] {
+  flex-grow: 1;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+}
+
+.remove-option-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.remove-option-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.add-option-btn {
+  background-color: var(--color-button-blue-base); /* Solid blue */
+  color: var(--color-text-white); /* White text */
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 10px 15px;
+  font-size: 0.95rem;
+  margin-top: var(--spacing-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-option-btn:hover {
+  background-color: var(--color-button-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Action Buttons (General Styles) --- */
+.btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+ 
+}
+
+.btn.primary {
+  background-color: var(--color-button-blue-base); /* Solid blue for primary buttons */
+  color: var(--color-text-white); /* White text */
+  box-shadow: var(--shadow-md);
+}
+
+.btn.primary:hover {
+  background-color: var(--color-button-blue-dark); /* Darker blue on hover */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn.primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn.secondary {
+  background-color: #6c757d;
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn.secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn.secondary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Build Form Actions (Bottom Button) --- */
+.build-form-actions {
+  
+  /* Add margin to position it 10px below the central panel's logical end */
+/* 16px, or adjust to 10px if needed */
+  /* Ensure enough space from the bottom of the page/footer if the footer has fixed height */
+  padding-bottom: var(--spacing-lg); /* Added padding for spacing from footer */
+}
+
+.build-form-actions .btn {
+  min-width: 250px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: var(--color-button-blue-base); /* Solid blue */
+  color: var(--color-text-white); /* White text */
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+}
+
+.build-form-actions .btn:hover {
+  background-color: var(--color-button-blue-dark); /* Darker blue on hover */
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 123, 255, 0.4);
+}
+
+.build-form-actions .btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+  .form-builder-layout {
+    grid-template-columns: 250px 1fr 300px;
+    gap: var(--spacing-lg);
+  }
+  .builder-sidebar h3 {
+    font-size: 1.6rem;
+  }
+  .field-type-item {
+    font-size: 1rem;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .form-main-title-input {
+    font-size: 1.8rem;
+    padding: 12px 15px;
+  }
+  .form-description-input {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+  .field-settings-form h4 {
+    font-size: 1.3rem;
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .form-builder-layout {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-md);
+  }
+
+  .builder-sidebar, .builder-canvas {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .back-button {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: var(--spacing-md);
+    width: fit-content;
+    align-self: flex-start;
+  }
+
+  .builder-title {
+    font-size: 2rem;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .build-form-actions {
+     /* On mobile, might need more space if footer is taller or layout changes */
+     margin-top: var(--spacing-xl);
+     padding-bottom: var(--spacing-xl);
+  }
+
+  .build-form-actions .btn {
+    min-width: 100%;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-builder-page-container {
+    padding: var(--spacing-md);
+  }
+  .builder-title {
+    font-size: 1.8rem;
+    margin-top: var(--spacing-lg);
+  }
+  .form-main-title-input {
+    font-size: 1.5rem;
+  }
+  .form-description-input {
+    font-size: 0.9rem;
+  }
+  .form-preview-field {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .field-preview-header {
+    font-size: 1rem;
+  }
+  .field-type-item {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+  .field-settings-form input {
+    font-size: 0.9rem;
+  }
+  .builder-sidebar h3 {
+    font-size: 1.5rem;
+  }
+}

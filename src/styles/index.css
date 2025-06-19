@@ -1,0 +1,50 @@
+:root {
+  /* Google Gemini Light Mode Inspired Palette */
+  --google-purple-500: #673ab7; /* Primary accent, like Google Forms header */
+  --google-purple-700: #512da8;
+  --google-blue-500: #4285f4;   /* For links, specific buttons */
+  --google-green-500: #34a853;  /* For success, download */
+  --google-red-500: #ea4335;    /* For errors, delete */
+  --google-yellow-500: #fbbc05; /* For warnings, special alerts */
+
+  --color-primary: var(--google-purple-500); /* Your main app accent */
+  --color-primary-dark: var(--google-purple-700);
+
+  --color-background-app: #e8eaed; /* Very light grey, subtle app background */
+  --color-background-section: #f8f9fa; /* Slightly darker grey for card backgrounds that are not pure white */
+  --color-background-card: #ffffff; /* White for main content cards */
+
+  --color-text-dark: #202124; /* Primary text color (dark grey) */
+  --color-text-medium: #5f6368; /* Secondary text, descriptions */
+  --color-text-light: #80868b; /* Placeholder, hints */
+
+  --color-border-light: #dadce0; /* Thin, subtle borders */
+  --color-border-medium: #bdc1c6;
+  --color-divider: #e0e0e0; /* Used for subtle separators */
+
+  --color-error: var(--google-red-500);
+  --color-success: var(--google-green-500); /* Use Google Green for success */
+
+  /* Shadows (Material Design style) */
+  --shadow-1dp: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15); /* For general cards */
+  --shadow-2dp: 0 4px 8px 3px rgba(60, 64, 67, 0.15), 0 2px 3px 0 rgba(60, 64, 67, 0.3); /* For hovered/active elements */
+
+  /* Border Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Spacing */
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.3s ease-out;
+}

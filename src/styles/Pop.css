@@ -1,0 +1,201 @@
+/* src/styles/Pop.css - Styles for the Submission Popup */
+
+/* --- Overlay Background --- */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- Popup Container --- */
+.popup-container {
+  background-color: var(--color-background-card, #ffffff); /* Use white background */
+  border-radius: var(--radius-lg, 12px); /* Rounded corners */
+  box-shadow: var(--shadow-2dp, 0 4px 8px rgba(0,0,0,0.2)); /* Prominent shadow */
+  width: 90%;
+  max-width: 550px; /* Max width for larger screens */
+  transform: translateY(20px); /* Start slightly below center */
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ensure content stays within borders */
+}
+
+.popup-overlay.show .popup-container {
+  transform: translateY(0); /* Slide into view */
+  opacity: 1;
+}
+
+/* --- Popup Header --- */
+.popup-header {
+  display: flex;
+  justify-content: flex-end; /* Pushes close button to the right */
+  align-items: center;
+  padding: var(--spacing-sm, 16px) var(--spacing-md, 24px); /* Adjusted padding */
+  border-bottom: 1px solid var(--color-divider, #e0e0e0); /* Subtle separator */
+}
+
+.popup-close-button {
+  background: none;
+  border: none;
+  font-size: 1.8rem; /* Larger close icon */
+  color: var(--color-text-light, #80868b); /* Light grey icon */
+  cursor: pointer;
+  padding: var(--spacing-xs, 8px); /* Padding for click area */
+  line-height: 1;
+  border-radius: var(--radius-sm, 4px);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.popup-close-button:hover {
+  background-color: var(--color-background-app, #e8eaed);
+  color: var(--color-text-dark, #202124);
+}
+
+.popup-back-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--color-primary, #673ab7);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: var(--radius-md, 8px);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: auto; /* Pushes itself to the left */
+}
+
+.popup-back-button:hover {
+  background-color: rgba(var(--color-primary, #673ab7), 0.1); /* Light primary hover */
+  color: var(--color-primary-dark, #512da8);
+}
+
+/* --- Popup Content --- */
+.popup-content {
+  padding: var(--spacing-md, 24px);
+  padding-top: var(--spacing-sm, 16px); /* Less top padding as header has it */
+  flex-grow: 1; /* Allows content to take available space */
+  overflow-y: auto; /* Enable scrolling for long content */
+  max-height: 70vh; /* Limit content height */
+}
+
+.popup-content h2 {
+  color: var(--color-text-dark, #202124);
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing-sm, 16px);
+  font-weight: 600;
+  text-align: center;
+}
+
+.popup-content p {
+  color: var(--color-text-medium, #5f6368);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: var(--spacing-lg, 24px);
+  text-align: center;
+}
+
+/* JSON Display Area */
+.json-display {
+  background-color: var(--color-background-app, #e8eaed); /* Light grey background for code */
+  padding: var(--spacing-md, 16px);
+  border-radius: var(--radius-md, 8px);
+  font-family: 'Roboto Mono', 'Courier New', monospace; /* Monospace font for JSON */
+  font-size: 0.9rem;
+  color: var(--color-text-dark, #202124);
+  white-space: pre-wrap; /* Preserve whitespace and wrap text */
+  word-break: break-all; /* Break long words */
+  max-height: 300px; /* Limit height for scroll */
+  overflow-y: auto;
+  border: 1px solid var(--color-border-light, #dadce0);
+  margin-bottom: var(--spacing-lg, 24px);
+}
+
+/* --- Popup Actions (Buttons) --- */
+.popup-actions {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  justify-content: center; /* Center buttons horizontally */
+  gap: var(--spacing-sm, 16px); /* Space between buttons */
+  margin-top: var(--spacing-md, 24px);
+  padding-top: var(--spacing-md, 16px); /* Padding above buttons */
+  border-top: 1px solid var(--color-divider, #e0e0e0); /* Separator above buttons */
+}
+
+/* Ensure buttons within popup use base button styles from App.css,
+   and apply specific overrides for consistency with Google aesthetic */
+.popup-actions .btn {
+  padding: 10px 20px; /* Slightly adjust padding for popup buttons */
+  font-size: 0.9rem;
+  /* Override global button shadows for a flatter, more modern look in popup actions */
+  box-shadow: none;
+  border: 1px solid transparent; /* Default transparent border */
+}
+
+/* Style for secondary buttons (Download, Copy) in the popup */
+.popup-actions .btn.secondary {
+  background-color: var(--color-background-app, #e8eaed); /* Lighter background */
+  color: var(--color-text-dark, #202124); /* Darker text */
+  border-color: var(--color-border-medium, #bdc1c6); /* Subtle border */
+}
+
+.popup-actions .btn.secondary:hover {
+  background-color: var(--color-divider, #e0e0e0); /* Slightly darker on hover */
+  transform: none; /* Remove translateY for these buttons */
+  box-shadow: none;
+}
+
+/* Style for the primary button (New Form) in the popup */
+.popup-actions .btn.primary {
+  background-color: var(--color-primary, #673ab7); /* Uses main primary color */
+  color: var(--color-white);
+  box-shadow: var(--shadow-1dp, 0 1px 2px rgba(0,0,0,0.1)); /* Subtle shadow for primary button */
+}
+
+.popup-actions .btn.primary:hover {
+  background-color: var(--color-primary-dark, #512da8); /* Darker primary on hover */
+  transform: translateY(-1px); /* Slight lift */
+  box-shadow: var(--shadow-2dp, 0 4px 8px rgba(0,0,0,0.2)); /* More prominent shadow on hover */
+}
+
+/* --- Remove all dropdown-specific styles --- */
+/* (Previous dropdown styles were here - now removed) */
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+  .popup-container {
+    width: 95%;
+    margin: 20px; /* Add some margin on very small screens */
+  }
+
+  .popup-content {
+    padding: var(--spacing-md, 16px);
+  }
+
+  .popup-actions {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: var(--spacing-sm, 12px);
+  }
+
+  .popup-actions .btn {
+    width: 100%; /* Full width buttons when stacked */
+  }
+}

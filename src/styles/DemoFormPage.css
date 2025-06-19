@@ -1,0 +1,576 @@
+/* src/styles/DemoFormPage.css */
+
+/* --- General Styling --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top for better scrolling on smaller screens */
+    min-height: 100vh;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    -webkit-font-smoothing: antialiased; /* Smoother fonts */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide spin buttons for number inputs (cross-browser) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+
+/* --- Form Page Container --- */
+.form-page-container {
+    max-width: clamp(300px, 70vw, 800px); /* Using clamp for better responsive width */
+    width: 100%;
+    margin: 40px auto;
+    padding: 30px 40px; /* Increased padding for breathing room */
+    background-color: #ffffff;
+    border-radius: 14px; /* Slightly softer corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* More subtle shadow */
+    position: relative;
+    overflow: hidden; /* Ensures no overflow from inner elements */
+    animation: fadeIn 0.8s ease-out; /* Page container fade-in animation */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Keyframe for page container fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Back Button (for main page) --- */
+.back-button {
+    position: absolute;
+    top: 25px; /* Stay at the top */
+    left: 40px; /* Align with new container padding */
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #007bff;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduced gap for a tighter look, was 15px */
+    z-index: 10; /* Ensure it's above other elements */
+}
+
+.back-button:hover {
+    background-color: #e6f2ff;
+    color: #0056b3;
+    transform: translateX(-5px);
+}
+
+.back-button:active {
+    transform: translateX(-3px);
+}
+
+/* --- Form Container (optional, as form-page-container already acts as main wrapper) --- */
+/* This specific .form-container might be redundant if .form-page-container is your main wrapper. */
+/* If it's a nested container, you might adjust its padding. For now, setting to 0 */
+.form-container {
+    padding: 0;
+    /* Removed margin-top here as we'll handle it on form-title */
+}
+
+.form-title {
+    text-align: center;
+    color: #333333;
+    font-size: 2.5rem; /* Slightly larger title */
+    margin-bottom: 15px; /* More space below title */
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+    /* --- NEW: Adjust margin-top for form-title to create space for back button --- */
+    margin-top: 50px; /* Default margin-top to clear the absolute back button */
+}
+
+.form-desc {
+    text-align: center;
+    color: #666666;
+    font-size: 1.1rem;
+    margin-bottom: 40px; /* Increased margin for description */
+    line-height: 1.6;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Form Grid Layout --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted minmax */
+    gap: 30px; /* Increased gap between grid items */
+    margin-bottom: 35px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #444444;
+    font-size: 0.98rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="email"], /* Added email */
+.form-group input[type="date"], /* Added date */
+.form-group input[type="time"], /* Added time */
+.form-group textarea,
+.form-group select { /* Added select */
+    padding: 13px 16px;
+    border: 1px solid black;
+    border-radius: 9px;
+    font-size: 1.05rem;
+    
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    
+    transform: translateY(-2px);
+   
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* --- Radio Button Styling --- */
+.radio-group .radio-options {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    padding-top: 5px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.radio-option:hover {
+    transform: translateX(5px);
+    color: #007bff;
+}
+
+.radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.radio-option span {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 0;
+    color: #333;
+    font-size: 1.05rem;
+}
+
+.radio-option span:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 22px;
+    width: 22px;
+    background-color: #e9e9e9;
+    border-radius: 50%;
+    border: 2px solid #bbb;
+    transition: all 0.3s ease;
+}
+
+.radio-option input[type="radio"]:checked + span:before {
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.radio-option input[type="radio"]:checked + span:after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 8px;
+    width: 8px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    animation: radioCheck 0.3s forwards;
+}
+
+@keyframes radioCheck {
+    from {
+        transform: translateY(-50%) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* --- Checkbox Styling (Assuming similar structure for checkbox) --- */
+.checkbox-group .checkbox-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.checkbox-option:hover {
+    transform: translateX(5px);
+    color: #007bff;
+}
+
+.checkbox-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-option span {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 0;
+    color: #333;
+    font-size: 1.05rem;
+}
+
+.checkbox-option span:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 22px;
+    width: 22px;
+    background-color: #e9e9e9;
+    border-radius: 6px;
+    border: 2px solid #bbb;
+    transition: all 0.3s ease;
+}
+
+.checkbox-option input[type="checkbox"]:checked + span:before {
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.checkbox-option input[type="checkbox"]:checked + span:after {
+    content: '\2713'; /* Checkmark */
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 16px;
+    line-height: 1;
+    animation: checkboxCheck 0.3s forwards;
+}
+
+@keyframes checkboxCheck {
+    from {
+        transform: translateY(-50%) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* --- Button Group --- */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.btn-primary,
+.btn-secondary,
+.json-btn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 9px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+/* Common button hover effect */
+.btn-primary:hover,
+.btn-secondary:hover,
+.json-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.json-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Button background fill animation */
+.btn-primary:before,
+.btn-secondary:before,
+.json-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: transform 0.4s ease-out;
+    transform: scaleX(0);
+    transform-origin: left;
+    z-index: -1;
+}
+
+.btn-primary:hover:before,
+.btn-secondary:hover:before,
+.json-btn:hover:before {
+    transform: scaleX(1);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.25);
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.json-btn {
+    display: block;
+    margin: 40px auto 0;
+    background-color: #28a745;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.25);
+}
+
+.json-btn:hover {
+    background-color: #218838;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+    }
+
+    .form-page-container {
+        margin: 20px;
+        padding: 25px;
+        border-radius: 10px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .json-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    .back-button {
+        top: 15px; /* Adjusted top for smaller screens */
+        left: 25px; /* Adjusted left for smaller screens, balancing with new padding */
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+
+    .form-title {
+        font-size: 2rem;
+        /* --- IMPORTANT FIX: Add sufficient top margin to clear the back button --- */
+        margin-top: 60px; /* Increased margin to push title below back button */
+    }
+
+    .form-desc {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .form-group label,
+    .radio-option span,
+    .checkbox-option span {
+        font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px 14px;
+        font-size: 0.95rem;
+    }
+    .radio-option span:before,
+    .checkbox-option span:before {
+        height: 20px;
+        width: 20px;
+        border-width: 1.5px;
+    }
+    .radio-option input[type="radio"]:checked + span:after {
+        left: 6px;
+        height: 7px;
+        width: 7px;
+    }
+    .checkbox-option input[type="checkbox"]:checked + span:after {
+        left: 4px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-page-container {
+        margin: 15px;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .back-button {
+        top: 10px;
+        left: 15px;
+        padding: 5px 8px;
+    }
+
+    .form-title {
+        font-size: 1.6rem;
+        /* --- IMPORTANT FIX: Further adjust top margin for very small screens --- */
+        margin-top: 50px; /* Adjust as needed, ensure it clears the button */
+    }
+
+    .form-desc {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .radio-option span,
+    .checkbox-option span {
+        font-size: 0.9rem;
+        padding-left: 28px;
+    }
+    .radio-option span:before,
+    .checkbox-option span:before {
+        height: 18px;
+        width: 18px;
+    }
+    .radio-option input[type="radio"]:checked + span:after {
+        left: 5px;
+        height: 6px;
+        width: 6px;
+    }
+    .checkbox-option input[type="checkbox"]:checked + span:after {
+        left: 3px;
+        font-size: 12px;
+    }
+
+    .button-group {
+        gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .json-btn {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+    }
+}
