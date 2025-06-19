@@ -8,7 +8,7 @@ import BuiltFormDisplayPage from "./pages/BuiltFormDisplayPage";
 
 const App = () => {
   return (
-    <Router basename="/Json_Form"> {/* ✅ No trailing slash */}
+    <Router basename="/React_form"> {/* ✅ No trailing slash */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/demo" element={<DemoFormPage />} />

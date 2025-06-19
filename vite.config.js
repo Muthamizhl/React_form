@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Json_Form/', // <-- Must match your repo name
+  base: '/React_form/', // <-- Must match your repo name
 });
