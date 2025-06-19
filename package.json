@@ -1,6 +1,8 @@
 {
   "name": "dynamic-form-generator",
   "type": "module",
+  "private":"true",
+  "version": "0.0.0",
   "homepage": "https://muthamizhl.github.io/React_form",
   "scripts": {
     "dev": "vite",

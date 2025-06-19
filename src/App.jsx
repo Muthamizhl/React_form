@@ -8,12 +8,15 @@ import BuiltFormDisplayPage from "./pages/BuiltFormDisplayPage";
 
 const App = () => {
   return (
-    <Routes>
+    <Router  basename="/React_form/">
+      <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/demo" element={<DemoFormPage />} />
       <Route path="/build" element={<FormBuilderPage />} />
       <Route path="/built-form" element={<BuiltFormDisplayPage />} />
     </Routes>
+    </Router>
+    
   );
 };
 
