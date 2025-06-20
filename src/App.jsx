@@ -1,6 +1,6 @@
 // src/App.jsx
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import DemoFormPage from "./pages/DemoFormPage";
 import FormBuilderPage from "./pages/FormBuilderPage";
@@ -8,15 +8,14 @@ import BuiltFormDisplayPage from "./pages/BuiltFormDisplayPage";
 
 const App = () => {
   return (
-    <Router  basename="/React_form/">
+    <Router basename="/React_form/">
       <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/demo" element={<DemoFormPage />} />
-      <Route path="/build" element={<FormBuilderPage />} />
-      <Route path="/built-form" element={<BuiltFormDisplayPage />} />
-    </Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/demo" element={<DemoFormPage />} />
+        <Route path="/build" element={<FormBuilderPage />} />
+        <Route path="/built-form" element={<BuiltFormDisplayPage />} />
+      </Routes>
     </Router>
-    
   );
 };
 
